@@ -1,18 +1,22 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2012-04-27T01:48:11
+#                   Ini Editor
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 TARGET = ini-editor
 TEMPLATE = app
 
+CONFIG += c++11
 
-SOURCES += main.cpp\
-        dialog.cpp
+SOURCES +=  main.cpp \
+            dialog.cpp
 
 HEADERS  += dialog.h
 
-FORMS    +=
+OBJECTS_DIR = obj
+MOC_DIR = obj
+RCC_DIR = obj
+UI_DIR = obj
