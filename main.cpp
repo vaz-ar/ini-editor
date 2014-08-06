@@ -1,20 +1,30 @@
 #include <QApplication>
 #include <QMessageBox>
+#include <QFileDialog>
 
-#include "dialog.h"
+#include "INI_Editor.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    QString s_filename;
 
-    if (argc < 2)
+    if (argc == 2)
     {
-        QMessageBox::critical(0, "No ini file supplied!", "Please supply an ini file to open as first argument.");
-        return -1;
+        s_filename = argv[1];
+    }
+    else
+    {
+        s_filename = QFileDialog::getOpenFileName(0, "Open INI File", "", "INI Files (*.ini)");
+
     }
 
-    Dialog w(argv[1]);
-    w.show();
+    if(s_filename.isEmpty())
+        exit(-1);
 
-    return a.exec();
+
+    INI_Editor w_editor(s_filename);
+    w_editor.show();
+
+    return app.exec();
 }

@@ -1,22 +1,22 @@
 #-------------------------------------------------
 #
-#                   Ini Editor
+#                   INI Editor
 #
 #-------------------------------------------------
 
 QT       += core gui widgets
 
-TARGET = ini-editor
+TARGET = INI_Editor
 TEMPLATE = app
 
 CONFIG += c++11
 
 SOURCES +=  main.cpp \
-            dialog.cpp
+            INI_Editor.cpp
 
-HEADERS  += dialog.h
+HEADERS  += INI_Editor.h
 
-OBJECTS_DIR = obj
-MOC_DIR = obj
-RCC_DIR = obj
-UI_DIR = obj
+OBJECTS_DIR =   obj
+MOC_DIR =       obj
+RCC_DIR =       obj
+UI_DIR =        obj
