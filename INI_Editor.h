@@ -11,8 +11,6 @@
 #include <QFile>
 #include <QMessageBox>
 
-#include <QDebug>
-
 class INI_Editor : public QDialog
 {
     Q_OBJECT
@@ -28,7 +26,6 @@ private:
 
 
 public:
-
 
     explicit INI_Editor(QString file, bool b_useSpacesInGroupName = true, QWidget *w_parent = NULL);
 
