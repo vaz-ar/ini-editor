@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QFile>
 #include <QMessageBox>
+#include <QScrollArea>
 
 class INI_Editor : public QDialog
 {

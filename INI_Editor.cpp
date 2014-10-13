@@ -7,7 +7,9 @@ INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidg
     mw_tab(new QTabWidget()),
     mb_useSpacesInGroupName(b_useSpacesInGroupName)
 {
+    QScrollArea * w_scrollArea;
     QWidget *w_page;
+
     QFormLayout *w_layout;
     QPushButton *w_saveButton = new QPushButton(tr("Save modifications"));
 
@@ -26,15 +28,21 @@ INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidg
         w_page = new QWidget();
         w_layout = new QFormLayout();
 
+        w_scrollArea = new QScrollArea();
+        w_scrollArea->setWidgetResizable(true);
+
+        w_page->setLayout(w_layout);
+        w_scrollArea->setWidget(w_page);
+
+        this->mw_tab->addTab(w_scrollArea, "General");
+
         for (QString s_item : this->mo_settings.childKeys())
         {
             w_layout->addRow(s_item, new QLineEdit(this->mo_settings.value(s_item).toString()));
         }
-        w_page->setLayout(w_layout);
-        this->mw_tab->addTab(w_page, "General");
     }
 
-    // --- others sections
+    // --- Others sections
     for (QString s_header : this->mo_settings.childGroups())
     {
         this->mo_settings.beginGroup(s_header);
@@ -42,14 +50,18 @@ INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidg
         w_page = new QWidget();
         w_layout = new QFormLayout();
 
-        for (QString s_item : this->mo_settings.childKeys())
-        {
-            w_layout->addRow(s_item,
-                             new QLineEdit(this->mo_settings.value(s_item).toString()));
-        }
+        w_scrollArea = new QScrollArea();
+        w_scrollArea->setWidgetResizable(true);
 
         w_page->setLayout(w_layout);
-        this->mw_tab->addTab(w_page, s_header);
+        w_scrollArea->setWidget(w_page);
+
+        this->mw_tab->addTab(w_scrollArea, s_header);
+
+        for (QString s_item : this->mo_settings.childKeys())
+        {
+            w_layout->addRow(s_item, new QLineEdit(this->mo_settings.value(s_item).toString()));
+        }
 
         this->mo_settings.endGroup();
     }
