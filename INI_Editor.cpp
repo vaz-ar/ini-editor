@@ -11,13 +11,20 @@ INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidg
     QWidget *w_page;
 
     QFormLayout *w_layout;
-    QPushButton *w_saveButton = new QPushButton(tr("Save modifications"));
+    QPushButton *w_saveButton = new QPushButton(tr(" Save modifications "));
+
+    // Button Style
+    QFont o_font;
+    o_font.setPointSize(13);
+    w_saveButton->setFont(o_font);
+    w_saveButton->setMinimumHeight(35);
 
     this->setLayout(new QVBoxLayout);
 
     this->layout()->addWidget(this->mw_tab);
 
     this->layout()->addWidget(w_saveButton);
+    this->layout()->setAlignment(w_saveButton, Qt::AlignCenter);
 
     connect(w_saveButton,   &QPushButton::clicked,
             this,           &INI_Editor::saveModifications);
