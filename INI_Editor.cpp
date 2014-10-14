@@ -1,6 +1,5 @@
 #include "INI_Editor.h"
 
-
 INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidget *w_parent) :
     QDialog(w_parent),
     mo_settings(file_settings, QSettings::IniFormat),
@@ -19,6 +18,7 @@ INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidg
     w_saveButton->setFont(o_font);
     w_saveButton->setMinimumHeight(35);
 
+    this->setMinimumSize(800, 600);
     this->setLayout(new QVBoxLayout);
 
     this->layout()->addWidget(this->mw_tab);
@@ -43,9 +43,16 @@ INI_Editor::INI_Editor(QString file_settings, bool b_useSpacesInGroupName, QWidg
 
         this->mw_tab->addTab(w_scrollArea, "General");
 
+        QVariant var_value;
+
         for (QString s_item : this->mo_settings.childKeys())
         {
-            w_layout->addRow(s_item, new QLineEdit(this->mo_settings.value(s_item).toString()));
+            var_value = this->mo_settings.value(s_item);
+
+            if (var_value.toString().isEmpty() && this->mo_settings.value(s_item).toStringList().size() > 0)
+                w_layout->addRow(s_item, new QLineEdit(this->mo_settings.value(s_item).toStringList().join(", ")));
+            else
+                w_layout->addRow(s_item, new QLineEdit(this->mo_settings.value(s_item).toString()));
         }
     }
 

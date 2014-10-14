@@ -11,8 +11,9 @@ TEMPLATE = app
 
 CONFIG += c++11
 
-SOURCES +=  main.cpp \
-            INI_Editor.cpp
+SOURCES +=  \
+            INI_Editor.cpp \
+    main_INI_Editor.cpp
 
 HEADERS  += INI_Editor.h
 
